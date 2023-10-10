@@ -3,7 +3,7 @@ import { getUsers } from "../api/users";
 
 const UsersList = () => {
   const users = useLoaderData();
-  console.log(users);
+
   return (
     <>
       <h1 className='page-title'>Users</h1>

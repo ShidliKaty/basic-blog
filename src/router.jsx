@@ -2,7 +2,7 @@ import { Navigate, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import { postsListRoute } from "./pages/PostsList";
 import { usersListRoute } from "./pages/UsersList";
-import TodosList from "./pages/TodosList";
+import { todosListRoute } from "./pages/TodosList";
 
 export const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
         ],
       },
       { path: "users", ...usersListRoute },
-      { path: "todos", element: <TodosList /> },
+      { path: "todos", ...todosListRoute },
     ],
   },
 ]);
