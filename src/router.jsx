@@ -17,13 +17,7 @@ export const router = createBrowserRouter([
           { path: ":postId", element: <h1>Hi</h1> },
         ],
       },
-      {
-        path: "users",
-        children: [
-          { index: true, ...usersListRoute },
-          { path: ":userId", element: <h1>Hi</h1> },
-        ],
-      },
+      { path: "users", ...usersListRoute },
       { path: "todos", element: <TodosList /> },
     ],
   },

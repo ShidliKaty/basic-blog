@@ -17,7 +17,7 @@ const UsersList = () => {
               <div>{user.email}</div>
             </div>
             <div className='card-footer'>
-              <Link className='btn' to={`/users/${user.id}`}>
+              <Link className='btn' to={user.id.toString()}>
                 View
               </Link>
             </div>
