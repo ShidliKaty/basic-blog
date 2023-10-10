@@ -1,10 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import NavBar from "../NavBar";
 
 const RootLayout = () => {
   return (
     <>
       <NavBar />
+      <ScrollRestoration />
       <div className='container'>
         <Outlet />
       </div>
