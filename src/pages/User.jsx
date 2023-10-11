@@ -5,6 +5,7 @@ import { getUser } from "../api/users";
 import { getPosts } from "../api/posts";
 import { getTodods } from "../api/todos";
 import PostCard from "../components/PostCard";
+import TodoItem from "../components/TodoItem";
 
 const User = () => {
   const { user, posts, todos } = useLoaderData();
@@ -32,12 +33,7 @@ const User = () => {
       <h3 className='mt-4 mb-2'>Todos</h3>
       <ul>
         {todos.map((todo) => (
-          <li
-            key={todo.id}
-            className={todo.completed ? "strike-through" : null}
-          >
-            {todo.title}
-          </li>
+          <TodoItem key={todo.id} {...todo} />
         ))}
       </ul>
     </>

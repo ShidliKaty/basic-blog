@@ -1,5 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import { getTodods } from "../api/todos";
+import TodoItem from "../components/TodoItem";
 
 const TodosList = () => {
   const todos = useLoaderData();
@@ -9,12 +10,7 @@ const TodosList = () => {
       <h1 className='page-title'>Todos</h1>
       <ul>
         {todos.map((todo) => (
-          <li
-            key={todo.id}
-            className={todo.completed ? "strike-through" : null}
-          >
-            {todo.title}
-          </li>
+          <TodoItem key={todo.id} {...todo} />
         ))}
       </ul>
     </>
