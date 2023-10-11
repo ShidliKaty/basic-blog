@@ -8,8 +8,6 @@ import { getUser } from "../api/users";
 const Post = () => {
   const { post, comments, user } = useLoaderData();
 
-  console.log(comments);
-
   return (
     <>
       <h1 className='page-title'>{post.title}</h1>
