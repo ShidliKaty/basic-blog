@@ -1,10 +1,12 @@
 import React from "react";
 
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { getUser } from "../api/users";
+import { getPosts } from "../api/posts";
+import { getTodods } from "../api/todos";
 
 const User = () => {
-  const user = useLoaderData();
+  const { user, posts, todos } = useLoaderData();
 
   return (
     <>
@@ -22,38 +24,42 @@ const User = () => {
       </div>
       <h3 className='mt-4 mb-2'>Posts</h3>
       <div className='card-grid'>
-        <div className='card'>
-          <div className='card-header'>
-            sunt aut facere repellat provident occaecati excepturi optio
-            reprehenderit
-          </div>
-          <div className='card-body'>
-            <div className='card-preview-text'>
-              quia et suscipit suscipit recusandae consequuntur expedita et cum
-              reprehenderit molestiae ut ut quas totam nostrum rerum est autem
-              sunt rem eveniet architecto
+        {posts.map((post) => (
+          <div key={post.id} className='card'>
+            <div className='card-header'>{post.title}</div>
+            <div className='card-body'>
+              <div className='card-preview-text'>{post.body}</div>
+            </div>
+            <div className='card-footer'>
+              <Link className='btn' to={`/posts/${post.id}`}>
+                View
+              </Link>
             </div>
           </div>
-          <div className='card-footer'>
-            <a className='btn' href='posts.html'>
-              View
-            </a>
-          </div>
-        </div>
+        ))}
       </div>
       <h3 className='mt-4 mb-2'>Todos</h3>
       <ul>
-        <li>delectus aut autem</li>
-        <li>quis ut nam facilis et officia qui</li>
-        <li>fugiat veniam minus</li>
-        <li className='strike-through'>et porro tempora</li>
+        {todos.map((todo) => (
+          <li
+            key={todo.id}
+            className={todo.completed ? "strike-through" : null}
+          >
+            {todo.title}
+          </li>
+        ))}
       </ul>
     </>
   );
 };
 
-const loader = ({ params, request: { signal } }) =>
-  getUser(params.userId, { signal });
+const loader = async ({ params: { userId }, request: { signal } }) => {
+  const user = getUser(userId, { signal });
+  const posts = getPosts({ signal, params: { userId } });
+  const todos = getTodods({ signal, params: { userId } });
+
+  return { user: await user, posts: await posts, todos: await todos };
+};
 
 export const userRoute = {
   loader,
