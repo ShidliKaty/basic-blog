@@ -7,3 +7,7 @@ export const getPosts = (options) => {
 export const getPost = (postId, options) => {
   return baseAPI.get(`posts/${postId}`, options).then((res) => res.data);
 };
+
+export const createPost = (data, options) => {
+  return baseAPI.post("posts", data, options).then((res) => res.data);
+};

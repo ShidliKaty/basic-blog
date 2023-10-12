@@ -1,6 +1,7 @@
 import React from "react";
 import { getUsers } from "../api/users";
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, redirect, useLoaderData } from "react-router-dom";
+import { createPost } from "../api/posts";
 
 const NewPost = () => {
   const users = useLoaderData();
@@ -43,9 +44,24 @@ const NewPost = () => {
   );
 };
 
+async function action({ request }) {
+  const formData = await request.formData();
+  const title = formData.get("title");
+  const body = formData.get("body");
+  const userId = formData.get("userId");
+
+  const post = await createPost(
+    { title, body, userId },
+    { signal: request.signal }
+  );
+
+  return redirect(`/posts/${post.id}`);
+}
+
 const loader = ({ request: { signal } }) => getUsers({ signal });
 
 export const newPostRoute = {
   loader,
+  action,
   element: <NewPost />,
 };
