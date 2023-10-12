@@ -11,3 +11,7 @@ export const getPost = (postId, options) => {
 export const createPost = (data, options) => {
   return baseAPI.post("posts", data, options).then((res) => res.data);
 };
+
+export const updatePost = (postId, data, options) => {
+  return baseAPI.put(`posts/${postId}`, data, options).then((res) => res.data);
+};

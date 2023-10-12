@@ -1,17 +1,22 @@
 import { Form, Link } from "react-router-dom";
 
-const PostForm = ({ users }) => {
+const PostForm = ({ users, defaultValues = {} }) => {
   return (
     <Form method='post' className='form'>
       <div className='form-row'>
         <div className='form-group error'>
           <label htmlFor='title'>Title</label>
-          <input type='text' name='title' id='title' />
+          <input
+            type='text'
+            name='title'
+            id='title'
+            defaultValue={defaultValues.title}
+          />
           <div className='error-message'>Required</div>
         </div>
         <div className='form-group'>
           <label htmlFor='userId'>Author</label>
-          <select name='userId' id='userId'>
+          <select name='userId' id='userId' defaultValue={defaultValues.userId}>
             {users.map((user, i) => (
               <option key={user.id} value={i + 1}>
                 {user.name}
@@ -23,7 +28,11 @@ const PostForm = ({ users }) => {
       <div className='form-row'>
         <div className='form-group'>
           <label htmlFor='body'>Body</label>
-          <textarea name='body' id='body'></textarea>
+          <textarea
+            name='body'
+            id='body'
+            defaultValue={defaultValues.body}
+          ></textarea>
         </div>
       </div>
       <div className='form-row form-btn-row'>
