@@ -16,8 +16,6 @@ const NewPost = () => {
   const users = useLoaderData();
   const errors = useActionData();
 
-  console.log(errors);
-
   return (
     <>
       <h1 className='page-title'>New Post</h1>
