@@ -1,15 +1,22 @@
 import React from "react";
 import PostForm from "../components/PostForm";
 import { getUsers } from "../api/users";
-import { redirect, useLoaderData } from "react-router-dom";
+import { redirect, useLoaderData, useNavigation } from "react-router-dom";
 import { getPost, updatePost } from "../api/posts";
 
 const EditPost = () => {
   const { users, post } = useLoaderData();
+  const { state } = useNavigation();
+  const isSubmitting = state === "submitting";
+
   return (
     <>
       <h1 className='page-title'>Edit Post</h1>
-      <PostForm users={users} defaultValues={post} />
+      <PostForm
+        users={users}
+        defaultValues={post}
+        isSubmitting={isSubmitting}
+      />
     </>
   );
 };

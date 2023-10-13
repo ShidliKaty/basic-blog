@@ -1,6 +1,6 @@
 import { Form, Link } from "react-router-dom";
 
-const PostForm = ({ users, defaultValues = {} }) => {
+const PostForm = ({ users, defaultValues = {}, isSubmitting }) => {
   return (
     <Form method='post' className='form'>
       <div className='form-row'>
@@ -39,7 +39,9 @@ const PostForm = ({ users, defaultValues = {} }) => {
         <Link className='btn btn-outline' to='..'>
           Cancel
         </Link>
-        <button className='btn'>Save</button>
+        <button disabled={isSubmitting} className='btn'>
+          {isSubmitting ? "Saving" : "Save"}
+        </button>
       </div>
     </Form>
   );
