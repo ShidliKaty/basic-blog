@@ -3,6 +3,7 @@ import { getPosts } from "../api/posts";
 import PostCard from "../components/PostCard";
 import { useEffect, useRef } from "react";
 import { getUsers } from "../api/users";
+import FormGroup from "../components/FormGroup";
 
 const PostsList = () => {
   const {
@@ -34,11 +35,11 @@ const PostsList = () => {
       </h1>
       <Form className='form mb-4'>
         <div className='form-row'>
-          <div className='form-group'>
+          <FormGroup>
             <label htmlFor='query'>Query</label>
             <input type='search' name='query' id='query' ref={searchRef} />
-          </div>
-          <div className='form-group'>
+          </FormGroup>
+          <FormGroup>
             <label htmlFor='userId'>Author</label>
             <select type='search' name='userId' id='userId' ref={filterRef}>
               <option value=''>Any</option>
@@ -48,7 +49,7 @@ const PostsList = () => {
                 </option>
               ))}
             </select>
-          </div>
+          </FormGroup>
           <button className='btn'>Filter</button>
         </div>
       </Form>
@@ -68,8 +69,6 @@ const loader = async ({ request: { signal, url } }) => {
   const filterParams = { q: query };
 
   if (userId !== "") filterParams.userId = userId;
-
-  console.log(filterParams);
 
   const posts = getPosts({ signal, params: filterParams });
   const users = getUsers({ signal });

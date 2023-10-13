@@ -1,10 +1,11 @@
 import { Form, Link } from "react-router-dom";
+import FormGroup from "./FormGroup";
 
-const PostForm = ({ users, defaultValues = {}, isSubmitting }) => {
+const PostForm = ({ users, defaultValues = {}, isSubmitting, errors = {} }) => {
   return (
     <Form method='post' className='form'>
       <div className='form-row'>
-        <div className='form-group error'>
+        <FormGroup errorMessage={errors.title}>
           <label htmlFor='title'>Title</label>
           <input
             type='text'
@@ -12,9 +13,8 @@ const PostForm = ({ users, defaultValues = {}, isSubmitting }) => {
             id='title'
             defaultValue={defaultValues.title}
           />
-          <div className='error-message'>Required</div>
-        </div>
-        <div className='form-group'>
+        </FormGroup>
+        <FormGroup errorMessage={errors.userId}>
           <label htmlFor='userId'>Author</label>
           <select name='userId' id='userId' defaultValue={defaultValues.userId}>
             {users.map((user, i) => (
@@ -23,17 +23,17 @@ const PostForm = ({ users, defaultValues = {}, isSubmitting }) => {
               </option>
             ))}
           </select>
-        </div>
+        </FormGroup>
       </div>
       <div className='form-row'>
-        <div className='form-group'>
+        <FormGroup errorMessage={errors.body}>
           <label htmlFor='body'>Body</label>
           <textarea
             name='body'
             id='body'
             defaultValue={defaultValues.body}
           ></textarea>
-        </div>
+        </FormGroup>
       </div>
       <div className='form-row form-btn-row'>
         <Link className='btn btn-outline' to='..'>
@@ -46,5 +46,21 @@ const PostForm = ({ users, defaultValues = {}, isSubmitting }) => {
     </Form>
   );
 };
+
+export function postFormValidator({ title, body, userId }) {
+  const errors = {};
+
+  if (title === "") {
+    errors.title = "required";
+  }
+  if (body === "") {
+    errors.body = "required";
+  }
+  if (userId === "") {
+    errors.userId = "required";
+  }
+
+  return errors;
+}
 
 export default PostForm;
