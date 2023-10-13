@@ -1,5 +1,5 @@
 import { Outlet, ScrollRestoration, useNavigation } from "react-router-dom";
-import NavBar from "../NavBar";
+import NavBar from "../components/NavBar";
 
 const RootLayout = () => {
   const { state } = useNavigation();
